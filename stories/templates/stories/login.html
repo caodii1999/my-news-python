@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_block %}
+
+<div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+    <div class="container padding_786">
+        <nav class="navbar navbar-toggleable-md navbar-light ">
+            <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+            <a class="navbar-brand" href="#"><img src="{% static 'stories/'%}images/logo.png" alt="img" class="mobile_logo_width"/></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'stories:index' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if pk == 1 %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    {% if pk == 2 %}
+					<li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'stories:story.html' latest.pk %}">Story <span class="sr-only">(current)</span></a>
+                    </li>                    
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:contact.html' %}">Contact <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:register.html' %}">Register <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:login.html' %}">Login <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+<div class="container-fluid mb-4">
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="text-center fh5co_heading py-2">Login</div>
+            </div>
+            <div class="col-12 col-md-6 align-self-center">
+                <form action="{% url 'stories:login.html' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Tên đăng nhập</label>
+                      <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Mật khẩu</label>
+                      <input type="password" class="form-control" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                  </form>
+            </div>
+        </div>
+        <div class="row">
+            <h6>{% if login_result %}{{login_result}}{% endif %}</h6>
+            <h6>{% if logout_result %}{{logout_result}}{% endif %}</h6>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

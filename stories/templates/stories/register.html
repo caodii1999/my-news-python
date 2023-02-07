@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_block %}
+
+<div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+    <div class="container padding_786">
+        <nav class="navbar navbar-toggleable-md navbar-light ">
+            <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+            <a class="navbar-brand" href="#"><img src="{% static 'stories/'%}images/logo.png" alt="img" class="mobile_logo_width"/></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'stories:index' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if pk == 1 %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    {% if pk == 2 %}
+					<li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'stories:story.html' latest.pk %}">Story <span class="sr-only">(current)</span></a>
+                    </li>                    
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:contact.html' %}">Contact <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:register.html' %}">Register <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:login.html' %}">Login <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container-fluid bg_dark">
+    <div class="container bg_dark">
+        <div class="row">
+            <a href="{% url 'stories:index'%}" class="fh5co_con_123"><i class="fa fa-home"></i></a>
+            <a href="{% url 'stories:register.html'%}" class="fh5co_con pt-2"> Register </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mb-4">
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="text-center fh5co_heading py-2">Registration Form</div>
+            </div>
+            <div class="col-12 col-md-6 align-self-center">
+                <form class="row" id="fh5co_contact_form" action="{% url 'stories:register.html' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-6 py-3 text-center">
+                        <table class="table">
+                            <tr>
+                                <td></td>
+                                <td>{{user_form.as_table}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>{{profile_form.as_table}}</td>
+                            </tr>
+                            <td></td>
+                            <td> <input type="submit" class="btn contact_btn" value="Register"></td>
+                        </table>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <h6>{% if registered%}Your registration is successfully. {% endif %} </h6>            
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

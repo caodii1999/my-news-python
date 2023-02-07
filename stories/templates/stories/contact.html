@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+
+<div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+    <div class="container padding_786">
+        <nav class="navbar navbar-toggleable-md navbar-light ">
+            <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+            <a class="navbar-brand" href="#"><img src="{% static 'stories/'%}images/logo.png" alt="img" class="mobile_logo_width"/></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'stories:index' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if pk == 1 %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    {% if pk == 2 %}
+					<li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:story.html' latest.pk %}">Story <span class="sr-only">(current)</span></a>
+                    </li>                    
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'stories:contact.html' %}">Contact <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:register.html' %}">Register <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:login.html' %}">Login <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container-fluid contact_us_bg_img">
+    <div class="container">
+        <div class="row">
+            <a href="#" class="fh5co_con_123"><i class="fa fa-home"></i></a>
+            <a href="#" class="fh5co_con pt-2"> Contact Us </a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid  fh5co_fh5co_bg_contcat">
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-md-4 py-3">
+                <div class="row fh5co_contact_us_no_icon_difh5co_hover">
+                    <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
+                        <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-phone"></i></span> </div>
+                    </div>
+                    <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
+                        <span class="c_g d-block">Call Us</span>
+                        <span class="d-block c_g fh5co_contact_us_no_text">(028) 38 351 056 </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-md-4 py-3">
+                <div class="row fh5co_contact_us_no_icon_difh5co_hover">
+                    <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
+                        <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-envelope"></i></span> </div>
+                    </div>
+                    <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
+                        <span class="c_g d-block">Have any questions?</span>
+                        <span class="d-block c_g fh5co_contact_us_no_text">tuvan@csc.hcmus.edu.vn</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-md-4 py-3">
+                <div class="row fh5co_contact_us_no_icon_difh5co_hover">
+                    <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
+                        <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-map-marker"></i></span> </div>
+                    </div>
+                    <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
+                        <span class="c_g d-block">Address</span>
+                        <span class="d-block c_g fh5co_contact_us_no_text"> 137E Nguyen Chi Thanh, District 5</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mb-4">
+    <div class="container">
+        <div class="col-12 text-center contact_margin_svnit ">
+            <div class="text-center fh5co_heading py-2">Contact Us</div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <form class="row" id="fh5co_contact_form" action="{% url 'stories:contact.html' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="col-6 py-3">
+                        {{form.name}}
+                        <!-- <input type="text" class="form-control fh5co_contact_text_box" placeholder="Enter Your Name" /> -->
+                    </div>
+                    <div class="col-6 py-3">
+                        {{form.phone_number}}
+                        <!-- <input type="text" class="form-control fh5co_contact_text_box" placeholder="E-mail" /> -->
+                    </div>
+                    <div class="col-6 py-3">
+                        {{form.email}}
+                        <!-- <input type="text" class="form-control fh5co_contact_text_box" placeholder="Subject" /> -->
+                    </div>
+                    <div class="col-6 py-3">
+                        {{form.subject}}
+                        <!-- <input type="text" class="form-control fh5co_contact_text_box" placeholder="Subject" /> -->
+                    </div>
+                    <div class="col-12 py-3">
+                        {{form.message}}
+                        <!-- <textarea class="form-control fh5co_contacts_message" placeholder="Message"></textarea> -->
+                    </div>
+                    <div class="col-12 py-3 text-center"> <input type="submit" class="btn contact_btn" value="Send Massage"> </div>
+                </form>
+            </div>
+            <div class="col-12 col-md-6 align-self-center">                
+				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15678.319198522426!2d106.6766759!3d10.7668321!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x89f1f126faaeebd9!2zVGjhur8gR2nhu5tpIE7hu4dtIGNoaSBuaMOhbmggUXXhuq1uIDEw!5e0!3m2!1svi!2s!4v1672233153503!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

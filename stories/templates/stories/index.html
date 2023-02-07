@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+<h6> Bạn đã truy cập trang web này {{visits}} lần</h6>
+<h6> Today is :{{today}} </h6>
+<h6> Lần cuối bạn truy cập trang này là :{{last_visit}} </h6>
+<div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+    <div class="container padding_786">
+        <nav class="navbar navbar-toggleable-md navbar-light ">
+            <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+            <a class="navbar-brand" href="#"><img src="{% static 'stories/'%}images/logo.png" alt="img" class="mobile_logo_width"/></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'stories:index' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if pk == 1 %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    {% if pk == 2 %}
+					<li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:story.html' latest.pk %}">Story <span class="sr-only">(current)</span></a>
+                    </li>                    
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:contact.html' %}">Contact <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:register.html' %}">Register <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:login.html' %}">Login <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="container-fluid paddding mb-5">
+    <div class="row mx-0">
+        {% if newest %}
+        <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
+            <div class="fh5co_suceefh5co_height"><img src="{{newest.image.url}}" alt="img"/>
+                <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                <div class="fh5co_suceefh5co_height_position_absolute_font">
+                    <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{newest.public_day}}
+                    </a></div>
+                    <div class=""><a href="{% url 'stories:story.html' newest.pk %}" class="fh5co_good_font"> {{newest.name}} (Truyện mới nhất)</a></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-md-6">
+            <div class="row">
+                {% if next_4_newest %}
+                {% for story in next_4_newest %}
+                <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                    <div class="fh5co_suceefh5co_height_2"><img src="{{story.image.url}}" alt="img"/>
+                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                        <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                            <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{story.public_day}} </a></div>
+                            <div class=""><a href="{% url 'stories:story.html' story.pk %}" class="fh5co_good_font_2"> 4 truyện mới tiếp theo <br>{{story.name}} </a></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-3">
+    <div class="container animate-box" data-animate-effect="fadeIn">
+        <div>
+            <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Young Children</div>
+        </div>
+        {% if young %}
+        <div class="owl-carousel owl-theme js" id="slider1">
+            {% for story in young %}
+            <div class="item px-2">
+                <div class="fh5co_latest_trading_img_position_relative">
+                    <div class="fh5co_latest_trading_img"><img src="{{story.image.url}}" alt="{{story.name}}" class="fh5co_img_special_relative"/></div>
+                    <div class="fh5co_latest_trading_img_position_absolute"></div>
+                    <div class="fh5co_latest_trading_img_position_absolute_1">
+                        <a href="{% url 'stories:story.html' story.pk %}" class="text-white"> {{story.name}} </a>
+                        <div class="fh5co_latest_trading_date_and_name_color">{{story.public_day}}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="container-fluid pb-4 pt-5">
+    <div class="container animate-box">
+        <div>
+            <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Older Children</div>
+        </div>
+        {% if older %}
+        <div class="owl-carousel owl-theme" id="slider2">
+            {% for story in older %}
+            <div class="item px-2">
+                <div class="fh5co_hover_news_img">
+                    <div class="fh5co_news_img"><img src="{{story.image.url}}" alt="{{story.name}}"/></div>
+                    <div>
+                        <a href="{% url 'stories:story.html' story.pk %}" class="d-block fh5co_small_post_heading"><span class="">{{story.name}}</span></a>
+                        <div class="c_g"><i class="fa fa-clock-o"></i>{{story.public_day}}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="container-fluid fh5co_video_news_bg pb-4">      
+    <div class="container animate-box" data-animate-effect="fadeIn">
+		<div>
+            <div class="fh5co_heading fh5co_heading_border_bottom pt-5 pb-2 mb-4  text-black">Video Stories</div>
+        </div>
+        <div>
+            <div class="owl-carousel owl-theme" id="slider3">
+                {% if stories %}
+                    {% for story in stories %}
+                    <div class="item px-2">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_hover_news_img_video_tag_position_relative">
+                                <div class="fh5co_news_img">
+                                    <iframe width="100%" height="200" src="{{story.url}}?controls=1" title="YouTube video player" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+
+                                <!-- <div class="fh5co_hover_news_img_video_tag_position_absolute fh5co_hide">
+                                    <img src="{{story.image.url}}" alt="{{story.name}}"/>
+                                </div> -->
+                          
+                                <!-- <div class="fh5co_hover_news_img_video_tag_position_absolute_1 fh5co_hide" id="play-video">
+                                    <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button_1">
+                                        <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button">
+                                            <span><i class="fa fa-play"></i></span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="pt-2">
+                                <a href="#" class="d-block fh5co_small_post_heading fh5co_small_post_heading_1">
+                                <span class="">{{story.name}} </span></a>
+                                <div class="c_g"><i class="fa fa-clock-o"></i> {{story.public_day}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

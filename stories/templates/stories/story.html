@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+<script type="text/javascript" src='{% static "ckeditor/ckeditor-init.js" %}'></script>
+<script type="text/javascript" src='{% static "ckeditor/ckeditor/ckeditor.js" %}'></script>
+
+<div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+    <div class="container padding_786">
+        <nav class="navbar navbar-toggleable-md navbar-light ">
+            <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+            <a class="navbar-brand" href="#"><img src="{% static 'stories/'%}images/logo.png" alt="img" class="mobile_logo_width"/></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'stories:index' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if pk == 1 %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 1 %}">Young Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    {% if pk == 2 %}
+					<li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:category.html' 2 %}">Older Children <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'stories:story.html' latest.pk %}">Story <span class="sr-only">(current)</span></a>
+                    </li>                    
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:contact.html' %}">Contact <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:register.html' %}">Register <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{% url 'stories:login.html' %}">Login <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div id="fh5co-single-content" class="container-fluid pb-4 pt-4 paddding">
+    <div class="container paddding">
+        <div class="row mx-0">
+            <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+                <h1>{{story.name}}</h1>
+                <span>{{story.author}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fh5co-single-content" class="container-fluid pb-4 pt-4 paddding">
+    <div class="container paddding">
+        <div class="row mx-0">
+            <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+                {{story.content|safe}}
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-4 pt-5">
+    <div class="container animate-box">
+        <div>
+            <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">New Stories</div>
+        </div>
+        <div class="owl-carousel owl-theme" id="slider2">
+            {% if newest %}
+            {% for story in newest %}
+            <div class="item px-2">
+                <div class="fh5co_hover_news_img">
+                    <div class="fh5co_news_img"><img src="{{story.image.url}}" alt="{{story.name}}"/></div>
+                    <div>
+                        <a href="{% url 'stories:story.html' story.pk %}" class="d-block fh5co_small_post_heading"><span class="">"{{story.name}}"</span></a>
+                        <div class="c_g"><i class="fa fa-clock-o"></i> "{{story.public_day}}"</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
